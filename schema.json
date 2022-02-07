@@ -1,0 +1,537 @@
+{
+    "projectId": "omitted",
+    "dataKey": "omitted",
+    "version": 12,
+    "created": "2022-02-03T00:11:48.808Z",
+    "updated": "2022-02-03T00:19:52.161Z",
+    "defaultLocale": "en-us",
+    "locales": ["en-us"],
+    "apiVersion": "2",
+    "schemaVersion": "3.15.0",
+    "queries": {
+      "getIndexedProductList": {
+        "shape": "PaginatedList<Shopify_Product>",
+        "resolver": {
+          "shapeName": "Shopify_Product",
+          "name": "takeshape:queryApiIndex",
+          "service": "takeshape:local",
+          "options": {"indexedShape": "Shopify_Product"}
+        },
+        "description": "Fetch Shopify products from the API Index.",
+        "args": "TSListArgs<Shopify_Product>"
+      },
+      "getIndexedCollectionList": {
+        "shape": "PaginatedList<Shopify_Collection>",
+        "resolver": {
+          "shapeName": "Shopify_Collection",
+          "name": "takeshape:queryApiIndex",
+          "service": "takeshape:local",
+          "options": {"indexedShape": "Shopify_Collection"}
+        },
+        "description": "Fetch Shopify product collections from API Index.",
+        "args": "TSListArgs<Shopify_Collection>"
+      },
+      "Shopify_collection": {
+        "resolver": {
+          "name": "graphql:query",
+          "service": "my-shopify-shop",
+          "fieldName": "collection"
+        },
+        "args": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "@tag": "id",
+              "description": "The ID of the Collection to return."
+            }
+          },
+          "required": ["id"]
+        },
+        "shape": "Shopify_Collection"
+      },
+      "Shopify_collections": {
+        "resolver": {
+          "name": "graphql:query",
+          "service": "my-shopify-shop",
+          "fieldName": "collections"
+        },
+        "args": {
+          "type": "object",
+          "properties": {
+            "first": {
+              "type": "integer",
+              "description": "Returns up to the first `n` elements from the list."
+            },
+            "after": {
+              "type": "string",
+              "description": "Returns the elements that come after the specified cursor."
+            },
+            "last": {
+              "type": "integer",
+              "description": "Returns up to the last `n` elements from the list."
+            },
+            "before": {
+              "type": "string",
+              "description": "Returns the elements that come before the specified cursor."
+            },
+            "reverse": {
+              "type": "boolean",
+              "description": "Reverse the order of the underlying list.",
+              "default": false
+            },
+            "sortKey": {
+              "@ref": "my-shopify-shop:CollectionSortKeys",
+              "description": "Sort the underlying list by the given key.",
+              "default": "ID"
+            },
+            "query": {
+              "type": "string",
+              "description": "Supported filter parameters:\n - `collection_type`\n - `publishable_status`\n - `published_status`\n - `title`\n - `updated_at`\n\nSee the detailed [search syntax](https://shopify.dev/api/usage/search-syntax)\nfor more information about using filters."
+            },
+            "savedSearchId": {
+              "type": "string",
+              "@tag": "id",
+              "description": "The ID of an existing saved search.\nThe search’s query string is used as the query argument.\nRefer to [SavedSearch](https://shopify.dev/api/admin-graphql/latest/objects/savedsearch)."
+            }
+          }
+        },
+        "shape": "Shopify_CollectionConnection"
+      },
+      "Shopify_product": {
+        "resolver": {
+          "name": "graphql:query",
+          "service": "my-shopify-shop",
+          "fieldName": "product"
+        },
+        "args": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "@tag": "id",
+              "description": "The ID of the Product to return."
+            }
+          },
+          "required": ["id"]
+        },
+        "shape": "Shopify_Product"
+      },
+      "Shopify_products": {
+        "resolver": {
+          "name": "graphql:query",
+          "service": "my-shopify-shop",
+          "fieldName": "products"
+        },
+        "args": {
+          "type": "object",
+          "properties": {
+            "first": {
+              "type": "integer",
+              "description": "Returns up to the first `n` elements from the list."
+            },
+            "after": {
+              "type": "string",
+              "description": "Returns the elements that come after the specified cursor."
+            },
+            "last": {
+              "type": "integer",
+              "description": "Returns up to the last `n` elements from the list."
+            },
+            "before": {
+              "type": "string",
+              "description": "Returns the elements that come before the specified cursor."
+            },
+            "reverse": {
+              "type": "boolean",
+              "description": "Reverse the order of the underlying list.",
+              "default": false
+            },
+            "sortKey": {
+              "@ref": "my-shopify-shop:ProductSortKeys",
+              "description": "Sort the underlying list by the given key.",
+              "default": "ID"
+            },
+            "query": {
+              "type": "string",
+              "description": "Supported filter parameters:\n - `barcode`\n - `created_at`\n - `delivery_profile_id`\n - `error_feedback`\n - `gift_card`\n - `has_only_default_variant`\n - `id`\n - `inventory_total`\n - `is_price_reduced`\n - `out_of_stock_somewhere`\n - `price`\n - `product_type`\n - `publishable_status`\n - `published_status`\n - `sku`\n - `status`\n - `tag`\n - `tag_not`\n - `title`\n - `updated_at`\n - `vendor`\n\nSee the detailed [search syntax](https://shopify.dev/api/usage/search-syntax)\nfor more information about using filters."
+            },
+            "savedSearchId": {
+              "type": "string",
+              "@tag": "id",
+              "description": "The ID of an existing saved search.\nThe search’s query string is used as the query argument.\nRefer to [SavedSearch](https://shopify.dev/api/admin-graphql/latest/objects/savedsearch)."
+            }
+          }
+        },
+        "shape": "Shopify_ProductConnection"
+      },
+      "getProductMetadata": {
+        "shape": "ProductMetadata",
+        "resolver": {
+          "name": "takeshape:get",
+          "service": "takeshape:local",
+          "shapeName": "ProductMetadata"
+        },
+        "description": "Get a ProductMetadata by ID",
+        "args": "TSGetArgs<ProductMetadata>"
+      },
+      "getProductMetadataList": {
+        "shape": "PaginatedList<ProductMetadata>",
+        "resolver": {
+          "name": "takeshape:list",
+          "service": "takeshape:local",
+          "shapeName": "ProductMetadata"
+        },
+        "description": "Returns a list ProductMetadata in natural order.",
+        "args": "TSListArgs<ProductMetadata>"
+      },
+      "getCollectionMetadata": {
+        "shape": "CollectionMetadata",
+        "resolver": {
+          "name": "takeshape:get",
+          "service": "takeshape:local",
+          "shapeName": "CollectionMetadata"
+        },
+        "description": "Get a CollectionMetadata by ID",
+        "args": "TSGetArgs<CollectionMetadata>"
+      },
+      "getCollectionMetadataList": {
+        "shape": "PaginatedList<CollectionMetadata>",
+        "resolver": {
+          "name": "takeshape:list",
+          "service": "takeshape:local",
+          "shapeName": "CollectionMetadata"
+        },
+        "description": "Returns a list CollectionMetadata in natural order.",
+        "args": "TSListArgs<CollectionMetadata>"
+      }
+    },
+    "mutations": {
+      "updateProductMetadata": {
+        "shape": "UpdateResult<ProductMetadata>",
+        "resolver": {
+          "name": "takeshape:update",
+          "service": "takeshape:local",
+          "shapeName": "ProductMetadata"
+        },
+        "description": "Update ProductMetadata",
+        "args": "UpdateArgs<ProductMetadata>"
+      },
+      "createProductMetadata": {
+        "shape": "CreateResult<ProductMetadata>",
+        "resolver": {
+          "name": "takeshape:create",
+          "service": "takeshape:local",
+          "shapeName": "ProductMetadata"
+        },
+        "description": "Create ProductMetadata",
+        "args": "CreateArgs<ProductMetadata>"
+      },
+      "duplicateProductMetadata": {
+        "shape": "DuplicateResult<ProductMetadata>",
+        "resolver": {
+          "name": "takeshape:duplicate",
+          "service": "takeshape:local",
+          "shapeName": "ProductMetadata"
+        },
+        "description": "Duplicate ProductMetadata",
+        "args": "DuplicateArgs<ProductMetadata>"
+      },
+      "deleteProductMetadata": {
+        "shape": "DeleteResult<ProductMetadata>",
+        "resolver": {
+          "name": "takeshape:delete",
+          "service": "takeshape:local",
+          "shapeName": "ProductMetadata"
+        },
+        "description": "Delete ProductMetadata",
+        "args": "DeleteArgs<ProductMetadata>"
+      },
+      "updateCollectionMetadata": {
+        "shape": "UpdateResult<CollectionMetadata>",
+        "resolver": {
+          "name": "takeshape:update",
+          "service": "takeshape:local",
+          "shapeName": "CollectionMetadata"
+        },
+        "description": "Update CollectionMetadata",
+        "args": "UpdateArgs<CollectionMetadata>"
+      },
+      "createCollectionMetadata": {
+        "shape": "CreateResult<CollectionMetadata>",
+        "resolver": {
+          "name": "takeshape:create",
+          "service": "takeshape:local",
+          "shapeName": "CollectionMetadata"
+        },
+        "description": "Create CollectionMetadata",
+        "args": "CreateArgs<CollectionMetadata>"
+      },
+      "duplicateCollectionMetadata": {
+        "shape": "DuplicateResult<CollectionMetadata>",
+        "resolver": {
+          "name": "takeshape:duplicate",
+          "service": "takeshape:local",
+          "shapeName": "CollectionMetadata"
+        },
+        "description": "Duplicate CollectionMetadata",
+        "args": "DuplicateArgs<CollectionMetadata>"
+      },
+      "deleteCollectionMetadata": {
+        "shape": "DeleteResult<CollectionMetadata>",
+        "resolver": {
+          "name": "takeshape:delete",
+          "service": "takeshape:local",
+          "shapeName": "CollectionMetadata"
+        },
+        "description": "Delete CollectionMetadata",
+        "args": "DeleteArgs<CollectionMetadata>"
+      }
+    },
+    "shapes": {
+      "Shopify_Product": {
+        "id": "Shopify_Product",
+        "name": "Shopify_Product",
+        "title": "Shopify_Product",
+        "schema": {
+          "extends": [
+            {"@ref": "my-shopify-shop:Product"},
+            {
+              "type": "object",
+              "properties": {
+                "metadata": {
+                  "@ref": "local:ProductMetadata",
+                  "@resolver": {
+                    "name": "takeshape:find",
+                    "service": "takeshape:local",
+                    "if": "$source.id",
+                    "shapeName": "ProductMetadata",
+                    "args": {
+                      "ops": [
+                        {"path": "where.productId.eq", "mapping": "$source.id"}
+                      ]
+                    }
+                  },
+                  "title": "Metadata"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "Shopify_Collection": {
+        "id": "Shopify_Collection",
+        "name": "Shopify_Collection",
+        "title": "Shopify_Collection",
+        "schema": {
+          "extends": [
+            {"@ref": "my-shopify-shop:Collection"},
+            {
+              "type": "object",
+              "properties": {
+                "metadata": {
+                  "@ref": "local:CollectionMetadata",
+                  "@resolver": {
+                    "name": "takeshape:find",
+                    "service": "takeshape:local",
+                    "if": "$source.id",
+                    "shapeName": "CollectionMetadata",
+                    "args": {
+                      "ops": [
+                        {"path": "where.collectionId.eq", "mapping": "$source.id"}
+                      ]
+                    }
+                  },
+                  "title": "Metadata"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "ProductMetadata": {
+        "id": "ZuLiOuazv",
+        "name": "ProductMetadata",
+        "title": "Product Metadata",
+        "workflow": "default",
+        "model": {"type": "multiple"},
+        "schema": {
+          "type": "object",
+          "properties": {
+            "productId": {
+              "type": "string",
+              "minLength": 0,
+              "description": "",
+              "title": "Product ID",
+              "@mapping": "takeshape:local:ProductMetadata.b9mbVFpRW"
+            },
+            "externalProductionSource": {
+              "type": "string",
+              "minLength": 0,
+              "description": "",
+              "title": "External Production Source",
+              "@mapping": "takeshape:local:ProductMetadata.LKlKBDwrd"
+            }
+          }
+        }
+      },
+      "CollectionMetadata": {
+        "id": "x-p59adya",
+        "name": "CollectionMetadata",
+        "title": "Collection Metadata",
+        "description": "Extended metadata about a collection",
+        "workflow": "default",
+        "model": {"type": "multiple"},
+        "schema": {
+          "type": "object",
+          "properties": {
+            "collectionId": {
+              "type": "string",
+              "minLength": 0,
+              "description": "",
+              "title": "Collection ID",
+              "@mapping": "takeshape:local:CollectionMetadata.P7w-kg68D"
+            },
+            "externalCollectionTitle": {
+              "type": "string",
+              "minLength": 0,
+              "description": "",
+              "title": "External Collection Title",
+              "@mapping": "takeshape:local:CollectionMetadata.3ASw_SgnA"
+            }
+          }
+        }
+      }
+    },
+    "workflows": {},
+    "forms": {
+      "ProductMetadata": {
+        "default": {
+          "properties": {
+            "productId": {"widget": "singleLineText"},
+            "externalProductionSource": {"widget": "singleLineText"}
+          },
+          "order": ["productId", "externalProductionSource"]
+        }
+      },
+      "CollectionMetadata": {
+        "default": {
+          "properties": {
+            "collectionId": {"widget": "singleLineText"},
+            "externalCollectionTitle": {"widget": "singleLineText"}
+          },
+          "order": ["collectionId", "externalCollectionTitle"]
+        }
+      }
+    },
+    "services": {
+      "my-shopify-shop": {
+        "title": "my-shopify-shop",
+        "namespace": "Shopify",
+        "provider": "shopify",
+        "serviceType": "graphql",
+        "authenticationType": "oauth2Bearer",
+        "options": {
+          "shop": "",
+          "endpoint": ""
+        },
+        "id": "my-shopify-shop"
+      }
+    },
+    "indexedShapes": {
+      "Shopify_Product": {
+        "queries": {
+          "list": {
+            "name": "Shopify_products",
+            "ignoreFields": [
+              "availablePublicationCount",
+              "publicationCount",
+              "publishedOnCurrentPublication",
+              "productPublications",
+              "publications",
+              "resourcePublications",
+              "resourcePublicationsV2",
+              "unpublishedChannels",
+              "unpublishedPublications",
+              "metadata"
+            ],
+            "objectDepthLimit": 1
+          },
+          "get": {
+            "name": "Shopify_product",
+            "ignoreFields": [
+              "availablePublicationCount",
+              "publicationCount",
+              "publishedOnCurrentPublication",
+              "productPublications",
+              "publications",
+              "resourcePublications",
+              "resourcePublicationsV2",
+              "unpublishedChannels",
+              "unpublishedPublications",
+              "metadata"
+            ],
+            "objectDepthLimit": 1
+          }
+        },
+        "triggers": [
+          {"type": "schedule", "query": "list", "interval": 1440},
+          {
+            "type": "webhook",
+            "query": "get",
+            "service": "my-shopify-shop",
+            "events": ["products/create", "products/update", "products/delete"]
+          }
+        ]
+      },
+      "Shopify_Collection": {
+        "queries": {
+          "list": {
+            "name": "Shopify_collections",
+            "ignoreFields": [
+              "availablePublicationCount",
+              "publicationCount",
+              "publishedOnCurrentPublication",
+              "productPublications",
+              "publications",
+              "resourcePublications",
+              "resourcePublicationsV2",
+              "unpublishedChannels",
+              "unpublishedPublications",
+              "metadata"
+            ],
+            "objectDepthLimit": 1
+          },
+          "get": {
+            "name": "Shopify_collection",
+            "ignoreFields": [
+              "availablePublicationCount",
+              "publicationCount",
+              "publishedOnCurrentPublication",
+              "productPublications",
+              "publications",
+              "resourcePublications",
+              "resourcePublicationsV2",
+              "unpublishedChannels",
+              "unpublishedPublications",
+              "metadata"
+            ],
+            "objectDepthLimit": 1
+          }
+        },
+        "triggers": [
+          {"type": "schedule", "query": "list", "interval": 1440},
+          {
+            "type": "webhook",
+            "query": "get",
+            "service": "my-shopify-shop",
+            "events": [
+              "collections/create",
+              "collections/update",
+              "collections/delete"
+            ]
+          }
+        ]
+      }
+    }
+  }
