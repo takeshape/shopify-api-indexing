@@ -7,7 +7,7 @@
     "defaultLocale": "en-us",
     "locales": ["en-us"],
     "apiVersion": "2",
-    "schemaVersion": "3.15.0",
+    "schemaVersion": "3.17.0",
     "queries": {
       "getIndexedProductList": {
         "shape": "PaginatedList<Shopify_Product>",
@@ -433,7 +433,8 @@
         "authenticationType": "oauth2Bearer",
         "options": {
           "shop": "",
-          "endpoint": ""
+          "endpoint": "",
+          "shopifyPlus": false
         },
         "id": "my-shopify-shop"
       }
@@ -443,34 +444,10 @@
         "queries": {
           "list": {
             "name": "Shopify_products",
-            "ignoreFields": [
-              "availablePublicationCount",
-              "publicationCount",
-              "publishedOnCurrentPublication",
-              "productPublications",
-              "publications",
-              "resourcePublications",
-              "resourcePublicationsV2",
-              "unpublishedChannels",
-              "unpublishedPublications",
-              "metadata"
-            ],
             "objectDepthLimit": 1
           },
           "get": {
             "name": "Shopify_product",
-            "ignoreFields": [
-              "availablePublicationCount",
-              "publicationCount",
-              "publishedOnCurrentPublication",
-              "productPublications",
-              "publications",
-              "resourcePublications",
-              "resourcePublicationsV2",
-              "unpublishedChannels",
-              "unpublishedPublications",
-              "metadata"
-            ],
             "objectDepthLimit": 1
           }
         },
@@ -488,34 +465,10 @@
         "queries": {
           "list": {
             "name": "Shopify_collections",
-            "ignoreFields": [
-              "availablePublicationCount",
-              "publicationCount",
-              "publishedOnCurrentPublication",
-              "productPublications",
-              "publications",
-              "resourcePublications",
-              "resourcePublicationsV2",
-              "unpublishedChannels",
-              "unpublishedPublications",
-              "metadata"
-            ],
             "objectDepthLimit": 1
           },
           "get": {
             "name": "Shopify_collection",
-            "ignoreFields": [
-              "availablePublicationCount",
-              "publicationCount",
-              "publishedOnCurrentPublication",
-              "productPublications",
-              "publications",
-              "resourcePublications",
-              "resourcePublicationsV2",
-              "unpublishedChannels",
-              "unpublishedPublications",
-              "metadata"
-            ],
             "objectDepthLimit": 1
           }
         },
