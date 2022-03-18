@@ -405,6 +405,16 @@
     },
     "workflows": {},
     "forms": {
+      "Shopify_Product": {
+        "default": {
+          "properties": {
+            "id": {"widget": "singleLineText"},
+            "featuredImage": {"widget": "shopifyImage"},
+            "title": {"widget": "singleLineText"}
+          },
+          "order": ["id", "featuredImage", "title"]
+        }
+      },
       "ProductMetadata": {
         "default": {
           "properties": {
