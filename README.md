@@ -4,6 +4,8 @@ Protecting yourself against API regressions or failures is simple with TakeShape
 
 Check out our [Schema spec documentation](https://app.takeshape.io/docs/schema/spec#indexedshapes) to learn how to configure API Indexing in your project today.
 
+> New to TakeShape? We combine every service you need into a single API with our API Mesh. [Check out our documentation](https://app.takeshape.io/docs/major-concepts) to learn how we can simplify your workflow.
+
 ## How to use this pattern
 
 1. Create a TakeShape project with the pattern in this repo. The button below will deploy the project:
@@ -49,5 +51,3 @@ Check out our [Schema spec documentation](https://app.takeshape.io/docs/schema/s
 ![Fresh query result](./images/fresh-result.png)
 
 9. You have now cached data with our API Indexing. Learn more about how you can extend your ecommerce data by checking out [our docs on TakeShape's data modeling](https://app.takeshape.io/docs/data/modeling). Learn how to configure your shapes from your project schema by diving into [our schema spec reference](https://app.takeshape.io/docs/schema/spec#shapes).
-
-New to TakeShape? We combine every service you need into a single API with our API Mesh. [Check out our documentation](https://app.takeshape.io/docs/major-concepts) to learn how we can simplify your workflow.
